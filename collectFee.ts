@@ -70,7 +70,7 @@ import { loadSecretKey } from './utils';
   }
 
   // withdraw
-  const tokenAccounts = await connection.getTokenAccountsByOwner(signer.publicKey, { mint });
+  const tokenAccounts = await connection.getTokenAccountsByOwner(signer.publicKey, { mint, programId: TOKEN_2022_PROGRAM_ID });
   const feeCollectionAccount = tokenAccounts.value[0];
   if (totalWithheldAmount > BigInt(0)) {
     const txHash = await withdrawWithheldTokensFromAccounts(

@@ -58,12 +58,12 @@ const decimals = 9;
 
   const sourceTokenAccounts = await connection.getTokenAccountsByOwner(
     signer.publicKey,
-    { mint }
+    { mint, programId: TOKEN_2022_PROGRAM_ID }
   );
   const sourceAccount = sourceTokenAccounts.value[0];
   const destinationTokenAccounts = await connection.getTokenAccountsByOwner(
     recipient,
-    { mint }
+    { mint, programId: TOKEN_2022_PROGRAM_ID }
   );
   let destinationAccount = destinationTokenAccounts.value?.[0]?.pubkey;
   if (!destinationAccount)
