@@ -33,32 +33,7 @@ import { decode } from 'bs58';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-async function loadSecretKey(filename: string): Promise<Keypair | undefined> {
-  try {
-    const data = (await readFile('secrets/' + filename)).toString();
-    let secretKey;
-    try {
-      const keyArray = JSON.parse(data);
-      secretKey = new Uint8Array(keyArray);
-    } catch (e) {
-      secretKey = decode(data);
-    }
-    return Keypair.fromSecretKey(secretKey);
-  }
-  catch (e) {
-    console.log(e);
-    console.log(`Please setup ${filename} in secrets folder`);
-  }
-}
-
-async function saveSecretKey(keypair: Keypair, filename: string) {
-  try {
-    await writeFile('secrets/' + filename, `[${keypair.secretKey.toString()}]`);
-  } catch (e) {
-    console.log(e);
-  }
-}
-
+import { loadSecretKey } from './utils';
 
 (async () => {
   const signer = await loadSecretKey('signer.key');
