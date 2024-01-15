@@ -18,6 +18,9 @@ import { readFile, writeFile } from 'fs/promises';
 import { decode } from 'bs58';
 import { Keypair } from '@solana/web3.js';
 
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 import { loadSecretKey, saveSecretKey } from './utils';
 import token_metadata from './token.json';
 
@@ -27,7 +30,7 @@ void (async function () {
   if (!signer || !mintKeypair) {
     process.exit(1);
   }
-  const umi = createUmi('https://api.devnet.solana.com');
+  const umi = createUmi(process.env.NODE_ENV == 'production' ? 'https://api.mainnet-beta.solana.com' : 'https://api.devnet.solana.com');
   const userWallet = umi.eddsa.createKeypairFromSecretKey(signer.secretKey);
   const userWalletSigner = createSignerFromKeypair(umi, userWallet);
 
