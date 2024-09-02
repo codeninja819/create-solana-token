@@ -14,10 +14,6 @@ import {
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import { mplCandyMachine } from '@metaplex-foundation/mpl-candy-machine';
 
-import { readFile, writeFile } from 'fs/promises';
-import { decode } from 'bs58';
-import { Keypair } from '@solana/web3.js';
-
 import * as dotenv from 'dotenv';
 dotenv.config();
 
